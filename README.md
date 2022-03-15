@@ -82,7 +82,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="Images/screenshot.png" alt="Logo" width="640" height="280">
+<img src="Images/screenshot.png" alt="screenshot" width="640" height="280">
 
 Developed in unity this project looks to make a new version of the 10 year old game of europa universalis 4.
 
