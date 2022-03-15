@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ItzCornflakez/map_game">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="Images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">map_game</h3>
@@ -82,7 +82,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img src="Images/screenshot.png" alt="Logo" width="640" height="280">
 
 Developed in unity this project looks to make a new version of the 10 year old game of europa universalis 4.
 
