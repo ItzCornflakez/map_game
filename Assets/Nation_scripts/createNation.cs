@@ -9,6 +9,17 @@ public class createNation : MonoBehaviour{
     public string description;
     public List<int> provinceIdList;
 
+    //Court
+    public string leaderName;
+    public int age;
+    public int admCapability, dipCapability, milCapability;
+    public string leaderNameHeir;
+    public int ageHeir;
+    public int admCapabilityHeir, dipCapabilityHeir, milCapabilityHeir;
+    public string leaderNameConsert;
+    public int ageConsert;
+    public int admCapabilityConsert, dipCapabilityConsert, milCapabilityConsert;
+
     //Diplomacy
     public int maxRelations;
     public List<string> relationList;
@@ -56,13 +67,18 @@ public class createNation : MonoBehaviour{
             
         }
 
+        Leader leader = new Leader("Ruler", leaderName, "", admCapability, dipCapability, milCapability, age);
+        Leader heir = new Leader("Heir", leaderNameHeir, "", admCapabilityHeir, dipCapabilityHeir, milCapabilityHeir, ageHeir);
+        Leader consert = new Leader("Consert", leaderNameConsert, "", admCapabilityConsert, dipCapabilityConsert, milCapabilityConsert, ageConsert);
+
         NationData nationData = new NationData(nationName, description, selectedProvinces);
+        Court court = new Court(leader, heir, consert);
         Diplomacy diplomacy = new Diplomacy(maxRelations, relationList, aggressiveExpansion);
         Military military = new Military(currForce, forceLimit, currManpower, maxManpower, dicipline, morale);
         Economy economy = new Economy(money, selectedProvinces);
         Religion religion = new Religion(religionName, missionaryStrength);
 
-        this.nation = new Nation(nationData, diplomacy, military, economy, religion);
+        this.nation = new Nation(nationData, court, diplomacy, military, economy, religion);
     }
     public Nation getNation(){return this.nation;}
 }
