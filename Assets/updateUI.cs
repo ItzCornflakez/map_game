@@ -18,12 +18,37 @@ public class updateUI : MonoBehaviour
     {
         //updateEconomyUI();
         this.provinceUI.SetActive(false);
+        this.updateCourtUI(nation1.GetComponent<createNation>().getNation().getCourt());
         
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
+
+    void updateCourtUI(Court court){
+        //Ruler
+        GameObject.Find("RulerNameText").GetComponent<Text>().text = $"{court.getRuler().getLeaderName()}";
+        GameObject.Find("RulerAdmText").GetComponent<Text>().text = $"{court.getRuler().getAdmCapability()}";
+        GameObject.Find("RulerDipText").GetComponent<Text>().text = $"{court.getRuler().getDipCapbility()}";
+        GameObject.Find("RulerMilText").GetComponent<Text>().text = $"{court.getRuler().getMilCapability()}";
+        GameObject.Find("RulerModifiersText").GetComponent<Text>().text = $"{this.stringOfModifiers(court.getRuler().getModifiers())}";
+        GameObject.Find("RulerAgeText").GetComponent<Text>().text = $"{court.getRuler().getLeaderAge()}";
+        //Heir
+        GameObject.Find("HeirNameText").GetComponent<Text>().text = $"{court.getHeir().getLeaderName()}";
+        GameObject.Find("HeirAdmText").GetComponent<Text>().text = $"{court.getHeir().getAdmCapability()}";
+        GameObject.Find("HeirDipText").GetComponent<Text>().text = $"{court.getHeir().getDipCapbility()}";
+        GameObject.Find("HeirMilText").GetComponent<Text>().text = $"{court.getHeir().getMilCapability()}";    
+        GameObject.Find("HeirModifiersText").GetComponent<Text>().text = $"{this.stringOfModifiers(court.getHeir().getModifiers())}";
+        GameObject.Find("HeirAgeText").GetComponent<Text>().text = $"{court.getHeir().getLeaderAge()}";
+        //Consort
+        GameObject.Find("ConsortNameText").GetComponent<Text>().text = $"{court.getConsort().getLeaderName()}";
+        GameObject.Find("ConsortAdmText").GetComponent<Text>().text = $"{court.getConsort().getAdmCapability()}";
+        GameObject.Find("ConsortDipText").GetComponent<Text>().text = $"{court.getConsort().getDipCapbility()}";
+        GameObject.Find("ConsortMilText").GetComponent<Text>().text = $"{court.getConsort().getMilCapability()}";
+        GameObject.Find("ConsortModifiersText").GetComponent<Text>().text = $"{this.stringOfModifiers(court.getConsort().getModifiers())}";
+        GameObject.Find("ConsortAgeText").GetComponent<Text>().text = $"{court.getConsort().getLeaderAge()}";
     }
     void updateEconomyUI(Economy economy){
     
@@ -75,5 +100,16 @@ public class updateUI : MonoBehaviour
 
 
 
+    }
+    public string stringOfModifiers(List<string> modifiers){
+        string modifiersString = "";
+        foreach (var item in modifiers){
+            if(modifiersString == ""){
+                modifiersString += $"{item}";
+            } else {
+            modifiersString += ", " + $"{item}";
+            }
+        }
+        return modifiersString;
     }
 }

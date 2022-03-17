@@ -19,5 +19,7 @@ public class Nation{
         
 
     }
+
+    public Court getCourt(){return this.court;}
     public Economy getEconomy(){return this.economy;}
 }

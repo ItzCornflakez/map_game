@@ -1,20 +1,24 @@
 public class Court{
 
-    private Leader leader;
+    private Leader ruler;
     private Leader heir;
 
-    private Leader consert;
+    private Leader consort;
 
     private Advisor admAdvisor, dipAdvisor, milAdvisor;
 
-    public Court(Leader leader, Leader heir, Leader consert){
-        this.leader = leader;
+    public Court(Leader ruler, Leader heir, Leader consort){
+        this.ruler = ruler;
         this.heir = heir;
-        this.consert = consert;
+        this.consort = consort;
         this.admAdvisor = null;
         this.dipAdvisor = null;
         this.milAdvisor = null;
     }
+
+    public Leader getRuler(){return this.ruler;}
+    public Leader getHeir(){return this.heir;}
+    public Leader getConsort(){return this.consort;}
 
 
 }

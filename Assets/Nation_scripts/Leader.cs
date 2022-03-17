@@ -13,7 +13,7 @@ public class Leader{
 
     private int age;
 
-    private List<string> skills;
+    private List<string> modifiers;
 
     public Leader(string typeOf, string name, string nickName, int admCapability, int dipCapability, int milCapability, int age){
         this.typeOf = typeOf;
@@ -23,6 +23,15 @@ public class Leader{
         this.dipCapability = dipCapability;
         this.milCapability = milCapability;
         this.age = age;
-        this.skills = new List<string>();
+        this.modifiers = new List<string>();
+        this.modifiers.Add("Item1");
+        this.modifiers.Add("Item2");
     } 
+
+    public string getLeaderName(){return this.name;}
+    public int getAdmCapability(){return this.admCapability;}
+    public int getDipCapbility(){return this.dipCapability;}
+    public int getMilCapability(){return this.milCapability;}
+    public List<string> getModifiers(){return this.modifiers;}
+    public int getLeaderAge(){return this.age;}
 }
