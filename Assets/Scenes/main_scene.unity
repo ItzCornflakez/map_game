@@ -31306,7 +31306,7 @@ MonoBehaviour:
   zoomChange: 30
   smoothChange: 4
   minSize: 2
-  maxSize: 13
+  maxSize: 40
 --- !u!1 &707044560
 GameObject:
   m_ObjectHideFlags: 0
