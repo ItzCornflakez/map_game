@@ -94,6 +94,7 @@ Developed in unity this project looks to make a new version of the 10 year old g
 
 * [Unity](https://unity.com/)
 * [c#](https://docs.microsoft.com/en-us/dotnet/csharp/)
+* [Blender](https://www.blender.org)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
