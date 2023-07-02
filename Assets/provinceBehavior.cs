@@ -20,7 +20,7 @@ public class provinceBehavior : MonoBehaviour
 
     void OnMouseDown(){
         this.provinceUI.SetActive(true);
-        GameObject.Find("UpdateUI").GetComponent<updateUI>().updateProvinceUI(this.transform.gameObject);
+        GameObject.Find("UpdateUI").GetComponent<updateUI>().UpdateProvinceUI(this.transform.gameObject);
     }
 
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using Unity.VisualScripting;
+using System.Linq;
 
 public class updateUI : MonoBehaviour
 {
@@ -12,7 +14,11 @@ public class updateUI : MonoBehaviour
 
     private Province province;
 
+    private Army army;
+
     public GameObject provinceUI;
+
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +63,7 @@ public class updateUI : MonoBehaviour
         GameObject.Find("ProductionText").GetComponent<Text>().text = $"{economy.getProduction()}";
         GameObject.Find("ProductionEfficiencyText").GetComponent<Text>().text = $"({economy.getProductionEfficiency() * 100}%)";
     }
-    public void updateProvinceUI(GameObject provinceGameObject){
+    public void UpdateProvinceUI(GameObject provinceGameObject){
 
         this.province = provinceGameObject.GetComponent<initializeProvince>().getProvince();
         GameObject parent = provinceGameObject.transform.parent.gameObject;
@@ -101,6 +107,42 @@ public class updateUI : MonoBehaviour
 
 
     }
+
+    public void UpdateMilitaryArmyUI(GameObject armyGameObject)
+    {
+        this.army = armyGameObject.GetComponent<initializeArmy>().Army;
+
+        float armyInfantryCount = 0f;
+        float armyHorsemenCount = 0f;
+        float armyArtilleryCount = 0f;
+
+        for(int i = 0; i < this.army.InfantryCollumb.Count; i++)
+        {
+            armyInfantryCount += this.army.InfantryCollumb.ElementAt(i).MenCount;
+        }
+        for (int i = 0; i < this.army.HorsemenCollumb.Count; i++)
+        {
+            armyHorsemenCount += this.army.HorsemenCollumb.ElementAt(i).MenCount;
+        }
+        for (int i = 0; i < this.army.ArtilleryCollumb.Count; i++)
+        {
+            armyArtilleryCount += this.army.ArtilleryCollumb.ElementAt(i).MenCount;
+        }
+
+        GameObject.Find("ArmyNameText").GetComponent<TMPro.TextMeshProUGUI>().text = this.army.ArmyName;
+        GameObject.Find("InfantryCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyInfantryCount}";
+        GameObject.Find("HorsemenCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyHorsemenCount}";
+        GameObject.Find("ArtilleryCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyArtilleryCount}";
+        GameObject.Find("TotalArmyCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyInfantryCount+armyHorsemenCount+armyArtilleryCount}";
+
+        GameObject.Find("infantrySingleDigitCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{this.army.InfantryCollumb.Count}";
+        GameObject.Find("infantryThousandCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyInfantryCount}";
+        GameObject.Find("horsemenSingleDigitCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{this.army.HorsemenCollumb.Count}";
+        GameObject.Find("horsemenThousandCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyHorsemenCount}";
+        GameObject.Find("artillerySingleDigitCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{this.army.ArtilleryCollumb.Count}";
+        GameObject.Find("artilleryThousandCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyArtilleryCount}";
+    }
+
     public string stringOfModifiers(List<string> modifiers){
         string modifiersString = "";
         foreach (var item in modifiers){
