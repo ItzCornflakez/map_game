@@ -28,83 +28,104 @@ public class updateUI : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    // Helper function to find inactive GameObjects by name
+    GameObject FindInactiveObject(string objectName)
     {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name == objectName && !obj.scene.isSubScene)
+            {
+                return obj;
+            }
+        }
+
+        Debug.LogWarning($"Object with name {objectName} not found.");
+        return null;
+    }
+
+    // Update UI elements
+    void UpdateText(string objectName, string value)
+    {
+        var textComponent = FindInactiveObject(objectName)?.GetComponent<Text>();
+        if (textComponent != null) textComponent.text = value;
     }
 
     void updateCourtUI(Court court){
-        //Ruler
-        GameObject.Find("RulerNameText").GetComponent<Text>().text = $"{court.getRuler().getLeaderName()}";
-        GameObject.Find("RulerAdmText").GetComponent<Text>().text = $"{court.getRuler().getAdmCapability()}";
-        GameObject.Find("RulerDipText").GetComponent<Text>().text = $"{court.getRuler().getDipCapbility()}";
-        GameObject.Find("RulerMilText").GetComponent<Text>().text = $"{court.getRuler().getMilCapability()}";
-        GameObject.Find("RulerModifiersText").GetComponent<Text>().text = $"{this.stringOfModifiers(court.getRuler().getModifiers())}";
-        GameObject.Find("RulerAgeText").GetComponent<Text>().text = $"{court.getRuler().getLeaderAge()}";
-        //Heir
-        GameObject.Find("HeirNameText").GetComponent<Text>().text = $"{court.getHeir().getLeaderName()}";
-        GameObject.Find("HeirAdmText").GetComponent<Text>().text = $"{court.getHeir().getAdmCapability()}";
-        GameObject.Find("HeirDipText").GetComponent<Text>().text = $"{court.getHeir().getDipCapbility()}";
-        GameObject.Find("HeirMilText").GetComponent<Text>().text = $"{court.getHeir().getMilCapability()}";    
-        GameObject.Find("HeirModifiersText").GetComponent<Text>().text = $"{this.stringOfModifiers(court.getHeir().getModifiers())}";
-        GameObject.Find("HeirAgeText").GetComponent<Text>().text = $"{court.getHeir().getLeaderAge()}";
-        //Consort
-        GameObject.Find("ConsortNameText").GetComponent<Text>().text = $"{court.getConsort().getLeaderName()}";
-        GameObject.Find("ConsortAdmText").GetComponent<Text>().text = $"{court.getConsort().getAdmCapability()}";
-        GameObject.Find("ConsortDipText").GetComponent<Text>().text = $"{court.getConsort().getDipCapbility()}";
-        GameObject.Find("ConsortMilText").GetComponent<Text>().text = $"{court.getConsort().getMilCapability()}";
-        GameObject.Find("ConsortModifiersText").GetComponent<Text>().text = $"{this.stringOfModifiers(court.getConsort().getModifiers())}";
-        GameObject.Find("ConsortAgeText").GetComponent<Text>().text = $"{court.getConsort().getLeaderAge()}";
+
+        // Update Ruler UI
+        UpdateText("RulerNameText", $"{court.getRuler().getLeaderName()}");
+        UpdateText("RulerAdmText", $"{court.getRuler().getAdmCapability()}");
+        UpdateText("RulerDipText", $"{court.getRuler().getDipCapbility()}");
+        UpdateText("RulerMilText", $"{court.getRuler().getMilCapability()}");
+        UpdateText("RulerModifiersText", $"{this.stringOfModifiers(court.getRuler().getModifiers())}");
+        UpdateText("RulerAgeText", $"{court.getRuler().getLeaderAge()}");
+
+        // Update Heir UI
+        UpdateText("HeirNameText", $"{court.getHeir().getLeaderName()}");
+        UpdateText("HeirAdmText", $"{court.getHeir().getAdmCapability()}");
+        UpdateText("HeirDipText", $"{court.getHeir().getDipCapbility()}");
+        UpdateText("HeirMilText", $"{court.getHeir().getMilCapability()}");
+        UpdateText("HeirModifiersText", $"{this.stringOfModifiers(court.getHeir().getModifiers())}");
+        UpdateText("HeirAgeText", $"{court.getHeir().getLeaderAge()}");
+
+        // Update Consort UI
+        UpdateText("ConsortNameText", $"{court.getConsort().getLeaderName()}");
+        UpdateText("ConsortAdmText", $"{court.getConsort().getAdmCapability()}");
+        UpdateText("ConsortDipText", $"{court.getConsort().getDipCapbility()}");
+        UpdateText("ConsortMilText", $"{court.getConsort().getMilCapability()}");
+        UpdateText("ConsortModifiersText", $"{this.stringOfModifiers(court.getConsort().getModifiers())}");
+        UpdateText("ConsortAgeText", $"{court.getConsort().getLeaderAge()}");
     }
     void updateEconomyUI(Economy economy){
-    
-        GameObject.Find("TaxationText").GetComponent<Text>().text = $"{economy.getTaxation()}";
-        GameObject.Find("TaxEfficiencyText").GetComponent<Text>().text = $"({economy.getTaxIncomeEfficiency() * 100}%)";
-        GameObject.Find("ProductionText").GetComponent<Text>().text = $"{economy.getProduction()}";
-        GameObject.Find("ProductionEfficiencyText").GetComponent<Text>().text = $"({economy.getProductionEfficiency() * 100}%)";
+
+        // Update Economy UI
+        UpdateText("TaxationText", $"{economy.getTaxation()}");
+        UpdateText("TaxEfficiencyText", $"({economy.getTaxIncomeEfficiency() * 100}%)");
+        UpdateText("ProductionText", $"{economy.getProduction()}");
+        UpdateText("ProductionEfficiencyText", $"({economy.getProductionEfficiency() * 100}%)");
     }
     public void UpdateProvinceUI(GameObject provinceGameObject){
 
         this.province = provinceGameObject.GetComponent<initializeProvince>().getProvince();
-        GameObject parent = provinceGameObject.transform.parent.gameObject;
-        GameObject grandParent = parent.transform.parent.gameObject;
-        
-        //Print on objects
-        GameObject.Find("CustomProvinceNameText").GetComponent<Text>().text = $"{this.province.getProvinceName()}";
-        GameObject.Find("ProvinceNameText").GetComponent<Text>().text = $"{this.province.getProvinceName()}";
-        GameObject.Find("AreaText").GetComponent<Text>().text = $"{parent.name}";
-        GameObject.Find("RegionText").GetComponent<Text>().text = $"{grandParent.name}";
-        GameObject.Find("TaxDevText").GetComponent<Text>().text = $"{this.province.getTaxDev()}";
-        GameObject.Find("ProdDevText").GetComponent<Text>().text = $"{this.province.getProdDev()}";
-        GameObject.Find("ManDevText").GetComponent<Text>().text = $"{this.province.getManDev()}";
-        GameObject.Find("DevText").GetComponent<Text>().text = $"{this.province.getDev()}";
-        GameObject.Find("DevCostText").GetComponent<Text>().text = $"{this.province.getDevCost()}";
-        GameObject.Find("DevastationText").GetComponent<Text>().text = $"{this.province.getDevastation()}";
-        GameObject.Find("LootText").GetComponent<Text>().text = $"{this.province.getLoot()}";
-        GameObject.Find("TaxText").GetComponent<Text>().text = $"{this.province.getProvincialTaxIncome()}";
-        GameObject.Find("ProductionText").GetComponent<Text>().text = $"{this.province.getProvincialProductionIncome()}";
-        GameObject.Find("TotalText").GetComponent<Text>().text = $"{(this.province.getProvincialTaxIncome() + this.province.getProvincialProductionIncome())}";
-        GameObject.Find("UnrestText").GetComponent<Text>().text = $"{this.province.getUnrest()}";
-        GameObject.Find("AutonomyText").GetComponent<Text>().text = $"{this.province.getAutonomy()}";
-        GameObject.Find("CultureText").GetComponent<Text>().text = $"{this.province.getCulture()}";
-        GameObject.Find("ReligionText").GetComponent<Text>().text = $"{this.province.getReligion()}";
-        GameObject.Find("ArmiesText").GetComponent<Text>().text = $"{this.province.getArmiesInQueue()}";
-        GameObject.Find("NaviesText").GetComponent<Text>().text = $"{this.province.getNaviesInQueue()}";
-        GameObject.Find("ManpowerText").GetComponent<Text>().text = $"{this.province.getManpower()}";
-        GameObject.Find("SupplyLimitText").GetComponent<Text>().text = $"{this.province.getSupplyLimit()}";
-        GameObject.Find("SailorsText").GetComponent<Text>().text = $"{this.province.getSailors()}";
-        GameObject.Find("ProvinceWarScoreText").GetComponent<Text>().text = $"{this.province.getProvinceWarScore()}";
-        GameObject.Find("FortLevelText").GetComponent<Text>().text = $"{this.province.getFortLevel()}";
-        GameObject.Find("FortDefenseText").GetComponent<Text>().text = $"{this.province.getFortDefense()}";
-        GameObject.Find("GarrisonText").GetComponent<Text>().text = $"{this.province.getGarrison()}";
-        GameObject.Find("TradePowerText").GetComponent<Text>().text = $"{this.province.getTradePower()}";
-        GameObject.Find("TradeValueText").GetComponent<Text>().text = $"{this.province.getTradeValue()}";
-        GameObject.Find("GoodsProducedText").GetComponent<Text>().text = $"{this.province.getGoodsProduced()}";
-        GameObject.Find("TradeGoodText").GetComponent<Text>().text = $"{this.province.getTradeGood()}";
-        GameObject.Find("MarketPriceText").GetComponent<Text>().text = $"{this.province.getMarketPrice()}";
-        
+        //GameObject parent = provinceGameObject.transform.parent.gameObject;
+        //GameObject grandParent = parent.transform.parent.gameObject;
 
-
+        UpdateText("CustomProvinceNameText", $"{this.province.getProvinceName()}");
+        UpdateText("ProvinceNameText", $"{this.province.getProvinceName()}");
+        //UpdateText("AreaText", $"{parent.name}");
+        //UpdateText("RegionText", $"{grandParent.name}");
+        UpdateText("AreaText", $"to be decided");
+        UpdateText("RegionText", $"to be decided");
+        UpdateText("TaxDevText", $"{this.province.getTaxDev()}");
+        UpdateText("ProdDevText", $"{this.province.getProdDev()}");
+        UpdateText("ManDevText", $"{this.province.getManDev()}");
+        UpdateText("DevText", $"{this.province.getDev()}");
+        UpdateText("DevCostText", $"{this.province.getDevCost()}");
+        UpdateText("DevastationText", $"{this.province.getDevastation()}");
+        UpdateText("LootText", $"{this.province.getLoot()}");
+        UpdateText("TaxText", $"{this.province.getProvincialTaxIncome()}");
+        UpdateText("ProductionText", $"{this.province.getProvincialProductionIncome()}");
+        UpdateText("TotalText", $"{(this.province.getProvincialTaxIncome() + this.province.getProvincialProductionIncome())}");
+        UpdateText("UnrestText", $"{this.province.getUnrest()}");
+        UpdateText("AutonomyText", $"{this.province.getAutonomy()}");
+        UpdateText("CultureText", $"{this.province.getCulture()}");
+        UpdateText("ReligionText", $"{this.province.getReligion()}");
+        UpdateText("ArmiesText", $"{this.province.getArmiesInQueue()}");
+        UpdateText("NaviesText", $"{this.province.getNaviesInQueue()}");
+        UpdateText("ManpowerText", $"{this.province.getManpower()}");
+        UpdateText("SupplyLimitText", $"{this.province.getSupplyLimit()}");
+        UpdateText("SailorsText", $"{this.province.getSailors()}");
+        UpdateText("ProvinceWarScoreText", $"{this.province.getProvinceWarScore()}");
+        UpdateText("FortLevelText", $"{this.province.getFortLevel()}");
+        UpdateText("FortDefenseText", $"{this.province.getFortDefense()}");
+        UpdateText("GarrisonText", $"{this.province.getGarrison()}");
+        UpdateText("TradePowerText", $"{this.province.getTradePower()}");
+        UpdateText("TradeValueText", $"{this.province.getTradeValue()}");
+        UpdateText("GoodsProducedText", $"{this.province.getGoodsProduced()}");
+        UpdateText("TradeGoodText", $"{this.province.getTradeGood()}");
+        UpdateText("MarketPriceText", $"{this.province.getMarketPrice()}");
 
     }
 
@@ -129,18 +150,20 @@ public class updateUI : MonoBehaviour
             armyArtilleryCount += this.army.ArtilleryCollumb.ElementAt(i).MenCount;
         }
 
-        GameObject.Find("ArmyNameText").GetComponent<TMPro.TextMeshProUGUI>().text = this.army.ArmyName;
-        GameObject.Find("InfantryCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyInfantryCount}";
-        GameObject.Find("HorsemenCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyHorsemenCount}";
-        GameObject.Find("ArtilleryCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyArtilleryCount}";
-        GameObject.Find("TotalArmyCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyInfantryCount+armyHorsemenCount+armyArtilleryCount}";
+        // Update Army UI
+        UpdateText("ArmyNameText", this.army.ArmyName);
+        UpdateText("InfantryCountText", $"{armyInfantryCount}");
+        UpdateText("HorsemenCountText", $"{armyHorsemenCount}");
+        UpdateText("ArtilleryCountText", $"{armyArtilleryCount}");
+        UpdateText("TotalArmyCountText", $"{armyInfantryCount + armyHorsemenCount + armyArtilleryCount}");
 
-        GameObject.Find("infantrySingleDigitCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{this.army.InfantryCollumb.Count}";
-        GameObject.Find("infantryThousandCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyInfantryCount}";
-        GameObject.Find("horsemenSingleDigitCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{this.army.HorsemenCollumb.Count}";
-        GameObject.Find("horsemenThousandCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyHorsemenCount}";
-        GameObject.Find("artillerySingleDigitCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{this.army.ArtilleryCollumb.Count}";
-        GameObject.Find("artilleryThousandCountText").GetComponent<TMPro.TextMeshProUGUI>().text = $"{armyArtilleryCount}";
+        // Update detailed counts
+        UpdateText("infantrySingleDigitCountText", $"{this.army.InfantryCollumb.Count}");
+        UpdateText("infantryThousandCountText", $"{armyInfantryCount}");
+        UpdateText("horsemenSingleDigitCountText", $"{this.army.HorsemenCollumb.Count}");
+        UpdateText("horsemenThousandCountText", $"{armyHorsemenCount}");
+        UpdateText("artillerySingleDigitCountText", $"{this.army.ArtilleryCollumb.Count}");
+        UpdateText("artilleryThousandCountText", $"{armyArtilleryCount}");
     }
 
     public string stringOfModifiers(List<string> modifiers){

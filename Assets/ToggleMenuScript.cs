@@ -13,7 +13,19 @@ public class ToggleMenuScript : MonoBehaviour
     private GameObject tabsUI; 
     void Start()
     {
-        tabsUI = GameObject.Find("TabsUI");
+
+        // Find all objects of type GameObject, including inactive ones
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name == "TabsUI" && !obj.scene.isSubScene)
+            {
+                tabsUI = obj;
+                break;
+            }
+        }
+
         for(int i = 0; i < tabsUI.transform.childCount; i++){
             int x = i;
         Button tempButton = tabsUI.transform.GetChild(x).gameObject.GetComponent<Button>();

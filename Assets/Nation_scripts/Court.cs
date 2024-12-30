@@ -1,4 +1,9 @@
-public class Court{
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Court
+{
 
     private Leader ruler;
     private Leader heir;
@@ -7,7 +12,10 @@ public class Court{
 
     private Advisor admAdvisor, dipAdvisor, milAdvisor;
 
-    public Court(Leader ruler, Leader heir, Leader consort){
+    private GameObject ui;
+
+    public Court(Leader ruler, Leader heir, Leader consort)
+    {
         this.ruler = ruler;
         this.heir = heir;
         this.consort = consort;
@@ -16,9 +24,9 @@ public class Court{
         this.milAdvisor = null;
     }
 
-    public Leader getRuler(){return this.ruler;}
-    public Leader getHeir(){return this.heir;}
-    public Leader getConsort(){return this.consort;}
+    public Leader getRuler() { return this.ruler; }
+    public Leader getHeir() { return this.heir; }
+    public Leader getConsort() { return this.consort; }
 
 
 }
