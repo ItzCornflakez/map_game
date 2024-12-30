@@ -109,7 +109,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-1. Unity hub with unity version 2021.1.0f1 Personal
+1. Unity hub with unity version 6000.0.32f Personal
 2. A git console(git bash) 
 
 ### Installation
