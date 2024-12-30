@@ -157,15 +157,14 @@ public class EventManager : MonoBehaviour
 
         for (int i = 0; i < currentEvent.optionList.Count; i++)
         {
-            HandleEventOption(currentEvent.optionList[i], buttonParent, i);
+            HandleEventOption(currentEvent, currentEvent.optionList[i], buttonParent, i);
         }
-
 
         activeEvents.Remove(currentEvent);
         firedEvents.Add(currentEvent);
     }
 
-    void HandleEventOption(EventOption option, Transform buttonParent, int i)
+    void HandleEventOption(EventData currentEvent, EventOption option, Transform buttonParent, int i)
     {
 
         GameObject instanceOfEventUIButton = Instantiate(eventUIButtonObject);
@@ -177,6 +176,8 @@ public class EventManager : MonoBehaviour
 
         // Set button text
         instanceOfEventUIButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = option.optionText;
+
+        instanceOfEventUIButton.GetComponent<Button>().onClick.AddListener(() => HandleEventLogic(currentEvent.eventID, i+1));
 
         HandleHoverLogic(option, instanceOfEventUIButton, i);
     }
@@ -244,5 +245,37 @@ public class EventManager : MonoBehaviour
         double elapsedDuration = (currentDate - startDate).TotalDays;
 
         return (elapsedDuration / totalDuration);
+    }
+
+    void HandleEventLogic(int eventID, int eventOption)
+    {
+        // For now - this is where all eventlogic is resolved.
+
+        switch (eventID)
+        {
+            case 00001:
+                switch (eventOption)
+                {
+                    case 1:
+                        // insert logic here
+                        break;
+                    case 2:
+                        // insert logic here
+                        break;
+                }
+                break;
+            case 00002:
+                switch (eventOption)
+                {
+                    case 1:
+                        // insert logic here
+                        break;
+                    case 2:
+                        // insert logic here
+                        break;
+                }
+                break;
+
+        }
     }
 }

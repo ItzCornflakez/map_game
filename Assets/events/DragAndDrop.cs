@@ -13,11 +13,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         // Cache components
         rectTransform = GetComponent<RectTransform>();
         canvas = GameObject.Find("Canvas").GetComponentInParent<Canvas>();
-
-        if (rectTransform == null)
-        {
-            Debug.LogWarning("No RectTransform found. Ensure this script is used with UI elements.");
-        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -41,7 +36,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             dragOffset = transform.position - mouseWorldPosition;
         }
 
-        Debug.Log($"Drag started on {gameObject.name} with offset {dragOffset}");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -63,14 +57,9 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, Camera.main.WorldToScreenPoint(transform.position).z));
             transform.position = mouseWorldPosition + dragOffset;
         }
-
-        Debug.Log($"Dragging {gameObject.name} to position {transform.position}");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log($"Drag ended on {gameObject.name} at position {transform.position}");
-        // Optional: Snap back to original position if needed
-        // transform.position = originalPosition;
     }
 }
