@@ -86,6 +86,10 @@
 
 Developed in unity this project looks to make a new version of the 10 year old game of europa universalis 4. The reason why this project was made was that there is so much lag and other stuff in europa universalis 4 that is caused by memory leaks and other issues that is a result of bad code.
 
+An image showing a event UI window.
+
+<img src="Images/screenshot_2.png" alt="screenshot" width="960" height="420">
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
