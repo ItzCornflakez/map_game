@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class provinceBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
     public GameObject provinceUI;
+    private RectTransform provinceRect;
+    private bool animationPlayed = false; // Flag to prevent spamming
+
     void Start()
     {
-        this.provinceUI.SetActive(false);  
+        // Ensure the UI starts offscreen
+        provinceRect = provinceUI.GetComponent<RectTransform>();
+        provinceUI.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetFlag(bool flag)
     {
-        
+        this.animationPlayed = flag;
     }
 
-    void OnMouseDown(){
-        this.provinceUI.SetActive(true);
+    void OnMouseDown()
+    {
+
+        // Check if the animation has already been played
+        if (animationPlayed) return;
+
+        animationPlayed = true; // Set the flag to true
+
+        // Enable the UI
+        provinceUI.SetActive(true);
+
+        // Move it from offscreen to its final position
+        provinceRect.anchoredPosition = new Vector2(-Screen.width, provinceRect.anchoredPosition.y);
+        LeanTween.moveX(provinceRect, 210, 0.5f).setEase(LeanTweenType.easeOutCubic);
+
+        // Update the UI
         GameObject.Find("UpdateUI").GetComponent<updateUI>().UpdateProvinceUI(this.transform.gameObject);
     }
-
 }

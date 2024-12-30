@@ -38013,7 +38013,7 @@ MonoBehaviour:
   smoothChange: 4
   minSize: 2
   maxSize: 40
-  maxAngle: 70
+  maxAngle: 55
 --- !u!1 &707044560
 GameObject:
   m_ObjectHideFlags: 0
@@ -38468,7 +38468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d7f196ef582a54093e6238fa51429a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  outlineMaterial: {fileID: 2100000, guid: a1cabf59946a29245895180adcc388a8, type: 2}
 --- !u!114 &711772268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45725,6 +45725,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1779087169}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 711772268}
+        m_TargetAssemblyTypeName: provinceBehavior, Assembly-CSharp
+        m_MethodName: SetFlag
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -87838,9 +87850,9 @@ RectTransform:
   - {fileID: 1155210268}
   m_Father: {fileID: 945593450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 200, y: 320}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 200, y: -40}
   m_SizeDelta: {x: 400, y: 640}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1779087171

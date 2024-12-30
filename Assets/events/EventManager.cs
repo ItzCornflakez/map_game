@@ -19,6 +19,9 @@ public class EventManager : MonoBehaviour
     private List<EventData> activeEvents = new List<EventData>();
     private List<EventData> firedEvents = new List<EventData>();
 
+    // List for deleting events after a certain amount of time
+    private List<EndTimerObject> endTimerForEvents = new List<EndTimerObject>();
+
     private GameObject timeObject;
 
     private DateTime lastCheckedTime;
@@ -90,6 +93,20 @@ public class EventManager : MonoBehaviour
     void OnDayChange()
     {
         HandleActiveEvents();
+        RemoveIdleEvents();
+    }
+
+    void RemoveIdleEvents()
+    {
+        currentTime = GetCurrentTime();
+
+        foreach (EndTimerObject time in endTimerForEvents)
+        {
+            if(currentTime >= time.endTime)
+            {
+                Destroy(time.eventUIObject);
+            }
+        }
     }
 
     DateTime GetCurrentTime()
@@ -138,6 +155,7 @@ public class EventManager : MonoBehaviour
     void FireEvent(EventData currentEvent)
     {
         GameObject instanceOfEventUI = Instantiate(eventUIObject);
+        endTimerForEvents.Add(new EndTimerObject(GetCurrentTime().AddMonths(4), instanceOfEventUI));
 
         GameObject parentObject = GameObject.Find("WindowUI");
 
@@ -279,6 +297,18 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case 00002:
+                switch (eventOption)
+                {
+                    case 1:
+                        // insert logic here
+                        break;
+                    case 2:
+                        // insert logic here
+                        break;
+                }
+                break;
+
+            case 00003:
                 switch (eventOption)
                 {
                     case 1:
