@@ -94,11 +94,12 @@ public class InitializeEvents : MonoBehaviour
 
             // Create the list of options
             List<EventOption> options = new List<EventOption>();
-            for (int i = 5; i < components.Length; i += 2)
+            for (int i = 5; i < components.Length; i += 3)
             {
                 string optionText = components[i];
                 int optionValue = int.Parse(components[i + 1]);
-                options.Add(new EventOption(optionText, optionValue));
+                string optionHoverText = components[i + 2];
+                options.Add(new EventOption(optionText, optionValue, optionHoverText));
             }
 
             // Create and return the EventData object

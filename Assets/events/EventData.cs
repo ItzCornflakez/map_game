@@ -16,11 +16,13 @@ public class EventOption
 {
     public string optionText;
     public int optionValue;
+    public string optionHoverText;
 
-    public EventOption(string optionText, int optionValue)
+    public EventOption(string optionText, int optionValue, string optionHoverText)
     {
         this.optionText = optionText;
         this.optionValue = optionValue;
+        this.optionHoverText = optionHoverText;
     }
 }
 

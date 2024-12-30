@@ -178,6 +178,20 @@ public class EventManager : MonoBehaviour
         instanceOfEventUIButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = option.optionText;
 
         instanceOfEventUIButton.GetComponent<Button>().onClick.AddListener(() => HandleEventLogic(currentEvent.eventID, i+1));
+        instanceOfEventUIButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            // Navigate to the object's parent's parent's parent
+            Transform parentToRemove = instanceOfEventUIButton.transform.parent?.parent?.parent;
+
+            if (parentToRemove != null)
+            {
+                Destroy(parentToRemove.gameObject); // Destroy the GameObject of the parent's parent's parent
+            }
+            else
+            {
+                Debug.LogWarning("Parent hierarchy does not have 3 levels up!");
+            }
+        });
 
         HandleHoverLogic(option, instanceOfEventUIButton, i);
     }
@@ -186,7 +200,7 @@ public class EventManager : MonoBehaviour
     {
         // Add the HoverTip component and configure it
         HoverTip hoverTip = instanceOfEventUIButton.AddComponent<HoverTip>();
-        hoverTip.tipToShow = $"Option: {option.optionText}\nValue: {option.optionValue}"; // Customize tip text
+        hoverTip.tipToShow = option.optionHoverText; // Customize tip text
         hoverTip.tipID = i; // Assign a unique tipID (matches the button index)
 
         HoverTipManager.TipInstance newTipInstance = new HoverTipManager.TipInstance
@@ -257,7 +271,7 @@ public class EventManager : MonoBehaviour
                 switch (eventOption)
                 {
                     case 1:
-                        // insert logic here
+                        GameObject.Find("TaxText").GetComponent<Text>().text = $"{1}";
                         break;
                     case 2:
                         // insert logic here

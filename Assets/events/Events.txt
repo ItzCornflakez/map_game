@@ -1,2 +1,2 @@
-00001, "Event 1", "This is the first event", 14441201, 14450225, "Option 1", 1, "Option 2", 2
-00002, "Event 2", "This is the second event", 14451201, 14500412, "Option 1", 10, "Option 2", 20
+00001, "Good Fortune", "A good years harvest is upon us.", 14441201, 14450225, "Take the bag", 1, "+1 land tax", "We do not need this", 2, "Nothing happens" 
+00002, "Event 2", "This is the second event", 14451201, 14500412, "Option 1", 10, "Nothing happens", "Option 2", 20, "Nothing happens"
