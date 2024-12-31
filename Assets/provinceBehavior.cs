@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class provinceBehavior : MonoBehaviour
+public class ProvinceBehavior : MonoBehaviour
 {
     public GameObject provinceUI;
     private RectTransform provinceRect;

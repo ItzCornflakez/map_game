@@ -8862,6 +8862,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187146989}
   m_CullTransparentMesh: 1
+--- !u!1 &187196393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 187196394}
+  m_Layer: 0
+  m_Name: NationHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &187196394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187196393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.160641, y: 0.29497847, z: -4.819424}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &188481607
 GameObject:
   m_ObjectHideFlags: 0
@@ -13834,6 +13865,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274872368}
   m_CullTransparentMesh: 1
+--- !u!1 &275789102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4367698339646508338, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
+  m_PrefabInstance: {fileID: 1764511046}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &275789104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275789102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7fe25d31e795645a74412fb44702e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  provinceId: 3
+  provinceName: 
+  provinceDescription: 
+  baseTax: 0
+  baseProduction: 0
+  baseManpower: 0
+  autonomy: 0
+  religion: 
+  culture: 
+  tradeGood: 
+--- !u!114 &275789105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275789102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab901108ddfb80b40bfaca0caffd166b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  provinceUI: {fileID: 1779087169}
+--- !u!64 &275789108
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275789102}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1410758377642104684, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
 --- !u!1 &277971183
 GameObject:
   m_ObjectHideFlags: 0
@@ -38456,19 +38549,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -3345404387316505638, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
   m_PrefabInstance: {fileID: 1764511046}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &711772267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 711772263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0d7f196ef582a54093e6238fa51429a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMaterial: {fileID: 2100000, guid: a1cabf59946a29245895180adcc388a8, type: 2}
 --- !u!114 &711772268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38494,7 +38574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7fe25d31e795645a74412fb44702e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  provinceId: 0
+  provinceId: 1
   provinceName: 
   provinceDescription: 
   baseTax: 0
@@ -45651,6 +45731,7 @@ GameObject:
   - component: {fileID: 874116290}
   - component: {fileID: 874116289}
   - component: {fileID: 874116288}
+  - component: {fileID: 874116291}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -45734,10 +45815,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 711772268}
-        m_TargetAssemblyTypeName: provinceBehavior, Assembly-CSharp
-        m_MethodName: SetFlag
-        m_Mode: 6
+      - m_Target: {fileID: 874116291}
+        m_TargetAssemblyTypeName: ExitProvinceUI, Assembly-CSharp
+        m_MethodName: ResetAllProvinceBehaviorScripts
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -45784,6 +45865,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874116286}
   m_CullTransparentMesh: 1
+--- !u!114 &874116291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874116286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e57e5438589077428c60cb06cde201e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &875470877
 GameObject:
   m_ObjectHideFlags: 0
@@ -86675,9 +86768,17 @@ PrefabInstance:
       value: sweden_early_test_map
       objectReference: {fileID: 0}
     - target: {fileID: 4689462044484843110, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689462044484843110, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 5d2911e02b8a61242974d76c1943ae24, type: 2}
+    - target: {fileID: 4689462044484843110, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2b50cbdbffc0be043894ade9ee4af036, type: 2}
     - target: {fileID: 4846282286064209942, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -86703,13 +86804,19 @@ PrefabInstance:
       addedObject: {fileID: 711772270}
     - targetCorrespondingSourceObject: {fileID: -3345404387316505638, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 711772267}
-    - targetCorrespondingSourceObject: {fileID: -3345404387316505638, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 711772268}
     - targetCorrespondingSourceObject: {fileID: -3345404387316505638, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 711772269}
+    - targetCorrespondingSourceObject: {fileID: -4367698339646508338, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 275789108}
+    - targetCorrespondingSourceObject: {fileID: -4367698339646508338, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 275789105}
+    - targetCorrespondingSourceObject: {fileID: -4367698339646508338, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 275789104}
   m_SourcePrefab: {fileID: 100100000, guid: 9310d7755cc3cc541975b976390a998d, type: 3}
 --- !u!1 &1764517685
 GameObject:
@@ -107202,7 +107309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d7f196ef582a54093e6238fa51429a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectRenderer: {fileID: 0}
   outlineMaterial: {fileID: 0}
+  isOutlined: 0
 --- !u!33 &3508703429196165327
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -107561,6 +107670,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 646263180}
   - {fileID: 1082643403}
+  - {fileID: 187196394}
   - {fileID: 280759275}
   - {fileID: 1766895255}
   - {fileID: 30433176}
