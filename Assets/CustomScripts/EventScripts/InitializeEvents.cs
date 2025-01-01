@@ -28,7 +28,7 @@ public class InitializeEvents : MonoBehaviour
         eventCollection = database.GetCollection<EventData>("events");
 
         // Specify the path to the text file
-        string filePath = Application.dataPath + "/events/Events.txt";
+        string filePath = Application.dataPath + "/CustomScripts/EventScripts/Events.txt";
 
         if (File.Exists(filePath))
         {
