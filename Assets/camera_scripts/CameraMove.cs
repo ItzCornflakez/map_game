@@ -26,8 +26,8 @@ public class CameraMove : MonoBehaviour
         }
 
         // WASD Movement
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = UserInput.instance.MoveInput.x;
+        float vertical = UserInput.instance.MoveInput.y;
 
         Vector3 direction = new Vector3(horizontal, vertical, 0f).normalized;
         Vector3 panMovement = direction * panSpeed * Time.deltaTime;

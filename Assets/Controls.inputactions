@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "QuickAcceptEvent",
+                    "name": "AcceptNotification",
                     "type": "Button",
                     "id": "2f55179b-53b7-4362-86e3-5595a9bc19bd",
                     "expectedControlType": "",
@@ -28,11 +28,11 @@
                 {
                     "name": "",
                     "id": "ff7fddb4-5d66-4d21-8783-ed7fa4e0ef98",
-                    "path": "c",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
-                    "action": "QuickAcceptEvent",
+                    "action": "AcceptNotification",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -50,7 +50,7 @@
                 {
                     "name": "up",
                     "id": "eae3aa35-721a-447b-b4cb-bfc0b8d6a2ad",
-                    "path": "w",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
@@ -61,7 +61,7 @@
                 {
                     "name": "down",
                     "id": "64e51b18-dd22-44b5-991a-9db534507ef2",
-                    "path": "a",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
@@ -72,7 +72,7 @@
                 {
                     "name": "left",
                     "id": "20561175-d268-47ad-afe3-aa3997d921b2",
-                    "path": "s",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
@@ -83,7 +83,7 @@
                 {
                     "name": "right",
                     "id": "a9e1896e-9afd-43eb-893d-0bf896e5a958",
-                    "path": "d",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
