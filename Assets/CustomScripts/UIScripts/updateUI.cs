@@ -8,24 +8,17 @@ using System.Linq;
 
 public class updateUI : MonoBehaviour
 {
-
-
-    public GameObject nation1;
-
-    private Province province;
+    public GameObject gameManager;
 
     private Army army;
 
     public GameObject provinceUI;
 
- 
     // Start is called before the first frame update
     void Start()
     {
-        //updateEconomyUI();
         this.provinceUI.SetActive(false);
-        this.updateCourtUI(nation1.GetComponent<createNation>().getNation().getCourt());
-        
+        this.UpdateCourtUI(gameManager.GetComponent<LoadGameInfo>().ActiveNation.Court);
     }
 
     // Helper function to find inactive GameObjects by name
@@ -52,81 +45,78 @@ public class updateUI : MonoBehaviour
         if (textComponent != null) textComponent.text = value;
     }
 
-    void updateCourtUI(Court court){
-
+    void UpdateCourtUI(Court court)
+    {
         // Update Ruler UI
-        UpdateText("RulerNameText", $"{court.getRuler().getLeaderName()}");
-        UpdateText("RulerAdmText", $"{court.getRuler().getAdmCapability()}");
-        UpdateText("RulerDipText", $"{court.getRuler().getDipCapbility()}");
-        UpdateText("RulerMilText", $"{court.getRuler().getMilCapability()}");
-        UpdateText("RulerModifiersText", $"{this.stringOfModifiers(court.getRuler().getModifiers())}");
-        UpdateText("RulerAgeText", $"{court.getRuler().getLeaderAge()}");
+        UpdateText("RulerNameText", court.Ruler.Name);
+        UpdateText("RulerAdmText", court.Ruler.AdmCapability.ToString());
+        UpdateText("RulerDipText", court.Ruler.DipCapability.ToString());
+        UpdateText("RulerMilText", court.Ruler.MilCapability.ToString());
+        UpdateText("RulerModifiersText", stringOfModifiers(court.Ruler.Modifiers));
+        UpdateText("RulerAgeText", court.Ruler.Age.ToString());
 
         // Update Heir UI
-        UpdateText("HeirNameText", $"{court.getHeir().getLeaderName()}");
-        UpdateText("HeirAdmText", $"{court.getHeir().getAdmCapability()}");
-        UpdateText("HeirDipText", $"{court.getHeir().getDipCapbility()}");
-        UpdateText("HeirMilText", $"{court.getHeir().getMilCapability()}");
-        UpdateText("HeirModifiersText", $"{this.stringOfModifiers(court.getHeir().getModifiers())}");
-        UpdateText("HeirAgeText", $"{court.getHeir().getLeaderAge()}");
+        UpdateText("HeirNameText", court.Heir.Name);
+        UpdateText("HeirAdmText", court.Heir.AdmCapability.ToString());
+        UpdateText("HeirDipText", court.Heir.DipCapability.ToString());
+        UpdateText("HeirMilText", court.Heir.MilCapability.ToString());
+        UpdateText("HeirModifiersText", stringOfModifiers(court.Heir.Modifiers));
+        UpdateText("HeirAgeText", court.Heir.Age.ToString());
 
         // Update Consort UI
-        UpdateText("ConsortNameText", $"{court.getConsort().getLeaderName()}");
-        UpdateText("ConsortAdmText", $"{court.getConsort().getAdmCapability()}");
-        UpdateText("ConsortDipText", $"{court.getConsort().getDipCapbility()}");
-        UpdateText("ConsortMilText", $"{court.getConsort().getMilCapability()}");
-        UpdateText("ConsortModifiersText", $"{this.stringOfModifiers(court.getConsort().getModifiers())}");
-        UpdateText("ConsortAgeText", $"{court.getConsort().getLeaderAge()}");
+        UpdateText("ConsortNameText", court.Consort.Name);
+        UpdateText("ConsortAdmText", court.Consort.AdmCapability.ToString());
+        UpdateText("ConsortDipText", court.Consort.DipCapability.ToString());
+        UpdateText("ConsortMilText", court.Consort.MilCapability.ToString());
+        UpdateText("ConsortModifiersText", stringOfModifiers(court.Consort.Modifiers));
+        UpdateText("ConsortAgeText", court.Consort.Age.ToString());
     }
-    void updateEconomyUI(Economy economy){
 
+    void UpdateEconomyUI(Economy economy)
+    {
         // Update Economy UI
-        UpdateText("TaxationText", $"{economy.getTaxation()}");
-        UpdateText("TaxEfficiencyText", $"({economy.getTaxIncomeEfficiency() * 100}%)");
-        UpdateText("ProductionText", $"{economy.getProduction()}");
-        UpdateText("ProductionEfficiencyText", $"({economy.getProductionEfficiency() * 100}%)");
+        UpdateText("TaxationText", economy.Taxation.ToString());
+        UpdateText("TaxEfficiencyText", $"({economy.TaxIncomeEfficiency * 100}%)");
+        UpdateText("ProductionText", economy.Production.ToString());
+        UpdateText("ProductionEfficiencyText", $"({economy.ProductionEfficiency * 100}%)");
     }
-    public void UpdateProvinceUI(GameObject provinceGameObject){
 
-        this.province = provinceGameObject.GetComponent<initializeProvince>().getProvince();
-        //GameObject parent = provinceGameObject.transform.parent.gameObject;
-        //GameObject grandParent = parent.transform.parent.gameObject;
-
-        UpdateText("CustomProvinceNameText", $"{this.province.getProvinceName()}");
-        UpdateText("ProvinceNameText", $"{this.province.getProvinceName()}");
-        //UpdateText("AreaText", $"{parent.name}");
-        //UpdateText("RegionText", $"{grandParent.name}");
-        UpdateText("AreaText", $"to be decided");
-        UpdateText("RegionText", $"to be decided");
-        UpdateText("TaxDevText", $"{this.province.getTaxDev()}");
-        UpdateText("ProdDevText", $"{this.province.getProdDev()}");
-        UpdateText("ManDevText", $"{this.province.getManDev()}");
-        UpdateText("DevText", $"{this.province.getDev()}");
-        UpdateText("DevCostText", $"{this.province.getDevCost()}");
-        UpdateText("DevastationText", $"{this.province.getDevastation()}");
-        UpdateText("LootText", $"{this.province.getLoot()}");
-        UpdateText("TaxText", $"{this.province.getProvincialTaxIncome()}");
-        UpdateText("ProductionText", $"{this.province.getProvincialProductionIncome()}");
-        UpdateText("TotalText", $"{(this.province.getProvincialTaxIncome() + this.province.getProvincialProductionIncome())}");
-        UpdateText("UnrestText", $"{this.province.getUnrest()}");
-        UpdateText("AutonomyText", $"{this.province.getAutonomy()}");
-        UpdateText("CultureText", $"{this.province.getCulture()}");
-        UpdateText("ReligionText", $"{this.province.getReligion()}");
-        UpdateText("ArmiesText", $"{this.province.getArmiesInQueue()}");
-        UpdateText("NaviesText", $"{this.province.getNaviesInQueue()}");
-        UpdateText("ManpowerText", $"{this.province.getManpower()}");
-        UpdateText("SupplyLimitText", $"{this.province.getSupplyLimit()}");
-        UpdateText("SailorsText", $"{this.province.getSailors()}");
-        UpdateText("ProvinceWarScoreText", $"{this.province.getProvinceWarScore()}");
-        UpdateText("FortLevelText", $"{this.province.getFortLevel()}");
-        UpdateText("FortDefenseText", $"{this.province.getFortDefense()}");
-        UpdateText("GarrisonText", $"{this.province.getGarrison()}");
-        UpdateText("TradePowerText", $"{this.province.getTradePower()}");
-        UpdateText("TradeValueText", $"{this.province.getTradeValue()}");
-        UpdateText("GoodsProducedText", $"{this.province.getGoodsProduced()}");
-        UpdateText("TradeGoodText", $"{this.province.getTradeGood()}");
-        UpdateText("MarketPriceText", $"{this.province.getMarketPrice()}");
-
+    public void UpdateProvinceUI(Province province)
+    {
+        // Update Province UI
+        UpdateText("CustomProvinceNameText", province.Name);
+        UpdateText("ProvinceNameText", province.Name);
+        UpdateText("ProvinceAreaText", "to be decided");
+        UpdateText("ProvinceRegionText", "to be decided");
+        UpdateText("ProvinceTaxDevText", province.CurrentTaxDevelopment.ToString());
+        UpdateText("ProvinceProdDevText", province.CurrentProductionDevelopment.ToString());
+        UpdateText("ProvinceManDevText", province.CurrentManpowerDevelopment.ToString());
+        UpdateText("ProvinceTotalDevelopmentText", province.TotalDevelopment.ToString());
+        UpdateText("ProvinceDevelopmentCostText", province.DevelopmentCost.ToString());
+        UpdateText("ProvinceDevastationText", province.Devastation.ToString());
+        UpdateText("ProvinceLootText", province.Loot.ToString());
+        UpdateText("ProvinceTaxText", province.TaxIncome.ToString());
+        UpdateText("ProvinceProductionText", province.ProductionIncome.ToString());
+        UpdateText("ProvinceTotalText", (province.TaxIncome + province.ProductionIncome).ToString());
+        UpdateText("ProvinceUnrestText", province.Unrest.ToString());
+        UpdateText("ProvinceAutonomyText", province.Autonomy.ToString());
+        UpdateText("ProvinceCultureText", province.Culture);
+        UpdateText("ProvinceReligionText", province.Religion);
+        UpdateText("ProvinceArmiesText", province.ArmiesInQueue.ToString());
+        UpdateText("ProvinceNaviesText", province.NaviesInQueue.ToString());
+        UpdateText("ProvinceManpowerText", province.Manpower.ToString());
+        UpdateText("ProvinceSupplyLimitText", province.SupplyLimit.ToString());
+        UpdateText("ProvinceSailorsText", province.Sailors.ToString());
+        UpdateText("ProvinceWarScoreText", province.WarScore.ToString());
+        UpdateText("ProvinceFortLevelText", province.FortLevel.ToString());
+        UpdateText("ProvinceFortDefenseText", province.FortDefense.ToString());
+        UpdateText("ProvinceGarrisonText", province.Garrison.ToString());
+        UpdateText("ProvinceTradePowerText", province.TradePower.ToString());
+        UpdateText("ProvinceTradeValueText", province.TradeValue.ToString());
+        UpdateText("ProvinceGoodsProducedText", province.GoodsProduced.ToString());
+        //UpdateText("ProvinceTradeGoodText", province.TradeGood);
+        UpdateText("ProvinceTradeGoodText", "Wine");
+        UpdateText("ProvinceMarketPriceText", province.MarketPrice.ToString());
     }
 
     public void UpdateMilitaryArmyUI(GameObject armyGameObject)
@@ -137,44 +127,37 @@ public class updateUI : MonoBehaviour
         float armyHorsemenCount = 0f;
         float armyArtilleryCount = 0f;
 
-        for(int i = 0; i < this.army.InfantryCollumb.Count; i++)
+        foreach (var infantry in this.army.InfantryCollumb)
         {
-            armyInfantryCount += this.army.InfantryCollumb.ElementAt(i).MenCount;
+            armyInfantryCount += infantry.MenCount;
         }
-        for (int i = 0; i < this.army.HorsemenCollumb.Count; i++)
+        foreach (var horseman in this.army.HorsemenCollumb)
         {
-            armyHorsemenCount += this.army.HorsemenCollumb.ElementAt(i).MenCount;
+            armyHorsemenCount += horseman.MenCount;
         }
-        for (int i = 0; i < this.army.ArtilleryCollumb.Count; i++)
+        foreach (var artillery in this.army.ArtilleryCollumb)
         {
-            armyArtilleryCount += this.army.ArtilleryCollumb.ElementAt(i).MenCount;
+            armyArtilleryCount += artillery.MenCount;
         }
 
         // Update Army UI
         UpdateText("ArmyNameText", this.army.ArmyName);
-        UpdateText("InfantryCountText", $"{armyInfantryCount}");
-        UpdateText("HorsemenCountText", $"{armyHorsemenCount}");
-        UpdateText("ArtilleryCountText", $"{armyArtilleryCount}");
-        UpdateText("TotalArmyCountText", $"{armyInfantryCount + armyHorsemenCount + armyArtilleryCount}");
+        UpdateText("InfantryCountText", armyInfantryCount.ToString());
+        UpdateText("HorsemenCountText", armyHorsemenCount.ToString());
+        UpdateText("ArtilleryCountText", armyArtilleryCount.ToString());
+        UpdateText("TotalArmyCountText", (armyInfantryCount + armyHorsemenCount + armyArtilleryCount).ToString());
 
         // Update detailed counts
-        UpdateText("infantrySingleDigitCountText", $"{this.army.InfantryCollumb.Count}");
-        UpdateText("infantryThousandCountText", $"{armyInfantryCount}");
-        UpdateText("horsemenSingleDigitCountText", $"{this.army.HorsemenCollumb.Count}");
-        UpdateText("horsemenThousandCountText", $"{armyHorsemenCount}");
-        UpdateText("artillerySingleDigitCountText", $"{this.army.ArtilleryCollumb.Count}");
-        UpdateText("artilleryThousandCountText", $"{armyArtilleryCount}");
+        UpdateText("infantrySingleDigitCountText", this.army.InfantryCollumb.Count.ToString());
+        UpdateText("infantryThousandCountText", armyInfantryCount.ToString());
+        UpdateText("horsemenSingleDigitCountText", this.army.HorsemenCollumb.Count.ToString());
+        UpdateText("horsemenThousandCountText", armyHorsemenCount.ToString());
+        UpdateText("artillerySingleDigitCountText", this.army.ArtilleryCollumb.Count.ToString());
+        UpdateText("artilleryThousandCountText", armyArtilleryCount.ToString());
     }
 
-    public string stringOfModifiers(List<string> modifiers){
-        string modifiersString = "";
-        foreach (var item in modifiers){
-            if(modifiersString == ""){
-                modifiersString += $"{item}";
-            } else {
-            modifiersString += ", " + $"{item}";
-            }
-        }
-        return modifiersString;
+    public string stringOfModifiers(List<string> modifiers)
+    {
+        return string.Join(", ", modifiers);
     }
 }

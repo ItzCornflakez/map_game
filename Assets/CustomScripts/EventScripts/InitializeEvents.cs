@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
-using System.Text;
-using System.IO;
-using System;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Globalization;
+using System;
+using System.IO;
+using OfficeOpenXml;
 
 public class InitializeEvents : MonoBehaviour
 {
-
     private MongoClient client;
     private IMongoDatabase database;
     private IMongoCollection<EventData> eventCollection;
@@ -21,30 +18,39 @@ public class InitializeEvents : MonoBehaviour
 
     void Start()
     {
-
         // Initialize MongoDB connection
         client = new MongoClient("mongodb://localhost:27017");
         database = client.GetDatabase("mapGameDatabase");
         eventCollection = database.GetCollection<EventData>("events");
 
-        // Specify the path to the text file
-        string filePath = Application.dataPath + "/CustomScripts/EventScripts/Events.txt";
+        // Specify the path to the Excel file
+        string filePath = Application.dataPath + "/CustomScripts/EventScripts/Events.xlsx";
 
         if (File.Exists(filePath))
         {
-            string[] lines = File.ReadAllLines(filePath);
-
-            foreach (string line in lines)
+            try
             {
-                // Parse each line to create EventData
-                EventData eventData = ParseLineToEventData(line);
-                if (eventData != null)
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Set EPPlus license context
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
                 {
-                    eventDataList.Add(eventData);
-                }
-            }
+                    var worksheet = package.Workbook.Worksheets[0]; // Assuming data is in the first sheet
 
-            Debug.Log("Successfully initialized events from file.");
+                    for (int row = 2; row <= worksheet.Dimension.End.Row; row++) // Skip headers
+                    {
+                        EventData eventData = ParseRowToEventData(worksheet, row);
+                        if (eventData != null)
+                        {
+                            eventDataList.Add(eventData);
+                        }
+                    }
+                }
+
+                Debug.Log("Successfully initialized events from file.");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to read Excel file: {ex.Message}");
+            }
         }
         else
         {
@@ -65,41 +71,32 @@ public class InitializeEvents : MonoBehaviour
         StartCoroutine(UploadAllEvents());
     }
 
-    private EventData ParseLineToEventData(string line)
+    private EventData ParseRowToEventData(ExcelWorksheet worksheet, int row)
     {
         try
         {
-            string[] components = line.Split(new string[] { "," }, StringSplitOptions.None);
+            int eventID = int.Parse(worksheet.Cells[row, 1].Text);
+            string eventName = worksheet.Cells[row, 2].Text;
+            string eventText = worksheet.Cells[row, 3].Text;
 
-            // Trim quotes and whitespace
-            for (int i = 0; i < components.Length; i++)
-            {
-                components[i] = components[i].Trim(' ', '"');
-            }
-
-            int eventID = int.Parse(components[0]);
-
-            // Extract event name and text
-            string eventName = components[1];
-            string eventText = components[2];
-
-            string fullStartDate = components[3];
-            string fullEndDate = components[4];
+            string fullStartDate = worksheet.Cells[row, 4].Text;
+            string fullEndDate = worksheet.Cells[row, 5].Text;
 
             string format = "yyyyMMdd";
 
             DateTime.TryParseExact(fullStartDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime convertedStartTime);
             DateTime.TryParseExact(fullEndDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime convertedEndTime);
 
-
             // Create the list of options
             List<EventOption> options = new List<EventOption>();
-            for (int i = 5; i < components.Length; i += 3)
+            int column = 6;
+            while (!string.IsNullOrWhiteSpace(worksheet.Cells[row, column].Text))
             {
-                string optionText = components[i];
-                int optionValue = int.Parse(components[i + 1]);
-                string optionHoverText = components[i + 2];
+                string optionText = worksheet.Cells[row, column].Text;
+                int optionValue = int.Parse(worksheet.Cells[row, column + 1].Text);
+                string optionHoverText = worksheet.Cells[row, column + 2].Text;
                 options.Add(new EventOption(optionText, optionValue, optionHoverText));
+                column += 3;
             }
 
             // Create and return the EventData object
@@ -107,7 +104,7 @@ public class InitializeEvents : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogError($"Failed to parse line: {line}. Error: {ex.Message}");
+            Debug.LogError($"Failed to parse row {row}. Error: {ex.Message}");
             return null;
         }
     }

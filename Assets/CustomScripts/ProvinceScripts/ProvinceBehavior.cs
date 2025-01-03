@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class ProvinceBehavior : MonoBehaviour
 {
-    public GameObject provinceUI;
+    private GameObject provinceUI;
     private RectTransform provinceRect;
     private bool animationPlayed = false; // Flag to prevent spamming
+
+    private Province province;
+
+    public Province Province { get => province; set => province = value; }
+    public GameObject ProvinceUI { get => provinceUI; set => provinceUI = value; }
 
     void Start()
     {
@@ -36,6 +41,7 @@ public class ProvinceBehavior : MonoBehaviour
         LeanTween.moveX(provinceRect, 210, 0.5f).setEase(LeanTweenType.easeOutCubic);
 
         // Update the UI
-        GameObject.Find("UpdateUI").GetComponent<updateUI>().UpdateProvinceUI(this.transform.gameObject);
+        GameObject.Find("UpdateUIManager").GetComponent<updateUI>().UpdateProvinceUI(province);
     }
+
 }

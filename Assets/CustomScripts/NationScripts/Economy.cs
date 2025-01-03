@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 
-public class Economy{
-
+public class Economy
+{
     private float money;
 
-    //Income
+    // Income
     private float taxation;
     private float production;
     private float trade;
@@ -18,8 +18,7 @@ public class Economy{
     private float condottieri;
     private float knowledgeSharing;
 
-
-    //Expenses
+    // Expenses
     private float advisors;
     private float stateMaintance;
     private float interest;
@@ -27,7 +26,7 @@ public class Economy{
     private float fortMaintance;
     private float colonialMaintance;
     private float missionariesMaintance;
-    private float RootOutCorruption;
+    private float rootOutCorruption;
     private float armyMaintance;
     private float fleetMaintance;
 
@@ -41,13 +40,13 @@ public class Economy{
     private float productionEfficiency;
     private float tradeEfficiency;
 
-    public Economy(float money, List<Province> provinces){
-        
+    public Economy(float money, float inflation, List<Province> provinces)
+    {
         this.money = money;
         this.provinces = provinces;
-        this.taxation = sumOfProvinceTaxes(this.provinces) + nationalTaxIncome;
-        this.production = sumOfProvinceProduction(this.provinces);
-        this.trade = 0; //Fix
+        this.taxation = SumOfProvinceTaxes(this.provinces) + nationalTaxIncome;
+        this.production = SumOfProvinceProduction(this.provinces);
+        this.trade = 0; // Fix
         this.gold = 0;
         this.harborFees = 0;
         this.subsidies = 0;
@@ -55,7 +54,7 @@ public class Economy{
         this.warReparations = 0;
         this.condottieri = 0;
         this.knowledgeSharing = 0;
-        this.inflation = 0;
+        this.inflation = inflation;
         this.advisors = 0;
         this.stateMaintance = 0;
         this.interest = 0;
@@ -63,31 +62,60 @@ public class Economy{
         this.fortMaintance = 0;
         this.colonialMaintance = 0;
         this.missionariesMaintance = 0;
-        this.RootOutCorruption = 0;
+        this.rootOutCorruption = 0;
         this.armyMaintance = 0;
         this.fleetMaintance = 0;
 
         this.taxIncomeEfficiency = 0.2f;
         this.productionEfficiency = 0.5f;
         this.tradeEfficiency = 0;
-
     }
-    private float sumOfProvinceTaxes(List<Province> provinces){
+
+    private float SumOfProvinceTaxes(List<Province> provinces)
+    {
         float totalTaxation = 0;
-        for(int i = 0; i < provinces.Count; i++){
-            totalTaxation += provinces[i].getProvincialTaxIncome();
+        foreach (var province in provinces)
+        {
+            totalTaxation += province.TaxIncome;
         }
         return totalTaxation;
     }
-    private float sumOfProvinceProduction(List<Province> provinces){
+
+    private float SumOfProvinceProduction(List<Province> provinces)
+    {
         float totalProduction = 0;
-        for(int i = 0; i < provinces.Count; i++){
-            totalProduction += provinces[i].getProvincialProductionIncome();
+        foreach (var province in provinces)
+        {
+            totalProduction += province.ProductionIncome;
         }
         return totalProduction;
     }
-    public float getTaxation(){return this.taxation;}
-    public float getTaxIncomeEfficiency(){return this.taxIncomeEfficiency;}
-    public float getProduction(){return this.production;}
-    public float getProductionEfficiency(){return this.productionEfficiency;}
+
+    public float Money { get => money; set => money = value; }
+    public float Taxation { get => taxation; set => taxation = value; }
+    public float Production { get => production; set => production = value; }
+    public float Trade { get => trade; set => trade = value; }
+    public float Gold { get => gold; set => gold = value; }
+    public float HarborFees { get => harborFees; set => harborFees = value; }
+    public float Subsidies { get => subsidies; set => subsidies = value; }
+    public float SpoilsOfWar { get => spoilsOfWar; set => spoilsOfWar = value; }
+    public float WarReparations { get => warReparations; set => warReparations = value; }
+    public float Condottieri { get => condottieri; set => condottieri = value; }
+    public float KnowledgeSharing { get => knowledgeSharing; set => knowledgeSharing = value; }
+    public float Advisors { get => advisors; set => advisors = value; }
+    public float StateMaintance { get => stateMaintance; set => stateMaintance = value; }
+    public float Interest { get => interest; set => interest = value; }
+    public float DiplomaticRelations { get => diplomaticRelations; set => diplomaticRelations = value; }
+    public float FortMaintance { get => fortMaintance; set => fortMaintance = value; }
+    public float ColonialMaintance { get => colonialMaintance; set => colonialMaintance = value; }
+    public float MissionariesMaintance { get => missionariesMaintance; set => missionariesMaintance = value; }
+    public float RootOutCorruption { get => rootOutCorruption; set => rootOutCorruption = value; }
+    public float ArmyMaintance { get => armyMaintance; set => armyMaintance = value; }
+    public float FleetMaintance { get => fleetMaintance; set => fleetMaintance = value; }
+    public float Inflation { get => inflation; set => inflation = value; }
+    public List<Province> Provinces { get => provinces; set => provinces = value; }
+    public float NationalTaxIncome { get => nationalTaxIncome; set => nationalTaxIncome = value; }
+    public float TaxIncomeEfficiency { get => taxIncomeEfficiency; set => taxIncomeEfficiency = value; }
+    public float ProductionEfficiency { get => productionEfficiency; set => productionEfficiency = value; }
+    public float TradeEfficiency { get => tradeEfficiency; set => tradeEfficiency = value; }
 }

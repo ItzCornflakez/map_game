@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Court
 {
-
     private Leader ruler;
     private Leader heir;
-
     private Leader consort;
 
-    private Advisor admAdvisor, dipAdvisor, milAdvisor;
+    private Advisor admAdvisor;
+    private Advisor dipAdvisor;
+    private Advisor milAdvisor;
 
     private GameObject ui;
 
@@ -24,9 +24,11 @@ public class Court
         this.milAdvisor = null;
     }
 
-    public Leader getRuler() { return this.ruler; }
-    public Leader getHeir() { return this.heir; }
-    public Leader getConsort() { return this.consort; }
-
-
+    public Leader Ruler { get => ruler; set => ruler = value; }
+    public Leader Heir { get => heir; set => heir = value; }
+    public Leader Consort { get => consort; set => consort = value; }
+    public Advisor AdmAdvisor { get => admAdvisor; set => admAdvisor = value; }
+    public Advisor DipAdvisor { get => dipAdvisor; set => dipAdvisor = value; }
+    public Advisor MilAdvisor { get => milAdvisor; set => milAdvisor = value; }
+    public GameObject UI { get => ui; set => ui = value; }
 }

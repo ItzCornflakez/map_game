@@ -11,11 +11,8 @@ public class ExitProvinceUI : MonoBehaviour
         // Call the setFlag method on each found object
         foreach (ProvinceBehavior province in provinceObjects)
         {
-            Debug.Log("in here");
             province.SetFlag(false);
         }
-
-        
 
     }
 }
